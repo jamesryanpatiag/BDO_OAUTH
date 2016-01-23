@@ -1,0 +1,24 @@
+server:
+    port: 80
+    server-header: BDO Open Standard Authentication v0.0.1-SNAPSHOT
+
+spring:
+    profiles:
+        active: dev
+    devtools:
+        restart:
+            enabled: true
+        livereload:
+            enabled: true
+    datasource:
+        url: jdbc:postgresql://localhost:5432/bdo_oauth
+        username: postgres
+        password: admin
+    mail:
+        host: localhost
+        port: 25
+        username:
+        password:
+
+management:
+    add-application-context-header: false
