@@ -8,15 +8,18 @@
      .config(['$stateProvider', function($stateProvider) {
         $stateProvider
         .state('login', {
-            url: '/login',
             params: {
                 clientKey: null,
                 redirectUri: null
             },
             views: {
                 "content" : {
-                    templateUrl: "scripts/app/login/login.html"
+                    templateUrl: "scripts/app/login/login.html",
+                    controller: 'LoginController'
                 }
+            },
+            data: {
+                pageTitle: 'Login'
             }
         });
      }]);

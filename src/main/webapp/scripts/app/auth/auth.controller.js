@@ -13,13 +13,15 @@ angular.module('bdo_oauth')
                 redirectUri: $stateParams.redirect_uri
            };
 
-           console.log($scope.auth);
-
            $http.post('api/v1/authenticate', $scope.auth)
                 .then(function(data) {
-                    $state.go('login');
+                    $state.go('login', {
+                        clientKey: data.data.clientKey,
+                        redirectUri: data.data.redirectUri
+                    }, {
+                        location: false
+                    });
                 }, function(data) {
-                    console.log(data);
                     $scope.auth.status = data.data.errors[0].defaultMessage;
                 });
     }]);

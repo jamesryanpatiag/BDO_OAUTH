@@ -62,7 +62,7 @@ public class AuthValidator extends JdbcDaoSupport implements ConstraintValidator
 
             try {
                 clientKey = Integer.parseInt(authResponseDTO.getClientKey());
-            } catch(Exception e) {
+            } catch (Exception e) {
                 constraintValidatorContext
                         .buildConstraintViolationWithTemplate(Constants.INVALID_CLIENTKEY_FORMAT)
                         .addConstraintViolation();
@@ -76,11 +76,11 @@ public class AuthValidator extends JdbcDaoSupport implements ConstraintValidator
                     "   AND client_active = 1" +
                     " LIMIT 1; ";
 
-            PreparedStatement ps;
+            PreparedStatement ps = null;
 
-            ResultSet rs;
+            ResultSet rs = null;
 
-            Connection conn = getConnection();
+            final Connection conn = getConnection();
 
             try {
                 ps = conn.prepareStatement(sql);
@@ -107,6 +107,17 @@ public class AuthValidator extends JdbcDaoSupport implements ConstraintValidator
                         .buildConstraintViolationWithTemplate("Exception thrown: " + e.getMessage())
                         .addConstraintViolation();
                 return false;
+            } finally {
+                try {
+                    if (ps != null || !ps.isClosed())
+                        ps.close();
+                    if (rs != null || !rs.isClosed())
+                        rs.close();
+                    if (conn != null || !conn.isClosed())
+                        conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
 
         }
