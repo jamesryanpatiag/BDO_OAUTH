@@ -20,4 +20,11 @@ public class Constants {
     public static final String TEMPLATE_SUFFIX = ".html";
     public static final String TEMPLATE_MODE = "HTML5";
 
+    /**
+     * ERROR MESSAGES
+     */
+    public static final String BLANK_CLIENTKEY = "Client ID/key can't be null or blank";
+    public static final String INVALID_CLIENTKEY_FORMAT = "Invalid client key format";
+    public static final String BLANK_REDIRECTURI = "Redirect URI can't be null or blank";
+
 }

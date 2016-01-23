@@ -8,7 +8,7 @@
      .config(['$stateProvider', function ($stateProvider) {
             $stateProvider
             .state('authorize', {
-                url: '/authorize',
+                url: '/authorize?clientkey&redirect_uri',
                 views: {
                     "content": {
                         templateUrl: 'scripts/app/auth/auth.html',

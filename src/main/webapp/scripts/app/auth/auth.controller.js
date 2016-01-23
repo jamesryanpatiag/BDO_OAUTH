@@ -5,20 +5,21 @@
  */
 
 angular.module('bdo_oauth')
-    .controller('AuthController', ['$scope', '$http', '$state', '$location', function($scope, $http, $state, $location) {
+    .controller('AuthController', ['$scope', '$http', '$state', '$stateParams', function($scope, $http, $state, $stateParams) {
+
            $scope.auth = {
                 status: "Authenticating...",
-                clientKey: $location.$$search.clientkey,
-                redirectUri: $location.$$search.redirect_uri
+                clientKey: $stateParams.clientkey,
+                redirectUri: $stateParams.redirect_uri
            };
 
            console.log($scope.auth);
 
            $http.post('api/v1/authenticate', $scope.auth)
-                .success(function(data) {
+                .then(function(data) {
+                    $state.go('login');
+                }, function(data) {
                     console.log(data);
-                })
-                .error(function(data) {
-                    console.log(data);
+                    $scope.auth.status = data.data.errors[0].defaultMessage;
                 });
     }]);

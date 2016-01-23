@@ -11,7 +11,7 @@ spring:
         livereload:
             enabled: true
     datasource:
-        url: jdbc:postgresql://localhost:5432/bdo_oauth
+        url: jdbc:postgresql://localhost:5432/bdo
         username: postgres
         password: admin
     mail:
