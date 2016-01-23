@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cfe176aa-892c-4cf4-96df-80b7a194665f" name="Default" comment="added the login page. the login form will now show if the client key and redirect uri are found in the database">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/cmi/bdo/oauth/web/rest/Login.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/scripts/app/login/login.controller.js" />
+    <list default="true" id="cfe176aa-892c-4cf4-96df-80b7a194665f" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/cmi/bdo/oauth/service/AuthenticationService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/cmi/bdo/oauth/validation/validator/AuthValidator.class" afterPath="$PROJECT_DIR$/target/classes/cmi/bdo/oauth/validation/validator/AuthValidator.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/cmi/bdo/oauth/web/rest/Authentication.class" afterPath="$PROJECT_DIR$/target/classes/cmi/bdo/oauth/web/rest/Authentication.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cmi/bdo/oauth/config/Constants.java" afterPath="$PROJECT_DIR$/src/main/java/cmi/bdo/oauth/config/Constants.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cmi/bdo/oauth/validation/validator/AuthValidator.java" afterPath="$PROJECT_DIR$/src/main/java/cmi/bdo/oauth/validation/validator/AuthValidator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cmi/bdo/oauth/web/rest/Authentication.java" afterPath="$PROJECT_DIR$/src/main/java/cmi/bdo/oauth/web/rest/Authentication.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/scripts/app/auth/auth.controller.js" afterPath="$PROJECT_DIR$/src/main/webapp/scripts/app/auth/auth.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/scripts/app/login/login.html" afterPath="$PROJECT_DIR$/src/main/webapp/scripts/app/login/login.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/scripts/app/login/login.js" afterPath="$PROJECT_DIR$/src/main/webapp/scripts/app/login/login.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/templates/index.html" afterPath="$PROJECT_DIR$/target/classes/templates/index.html" />
     </list>
     <ignored path="bdo-oauth.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -48,16 +42,8 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/cmi/bdo/oauth/validation/validator/AuthValidator.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="72" column="33" selection-start-line="72" selection-start-column="33" selection-end-line="72" selection-end-column="33" />
-              <folding>
-                <marker date="1453519036462" expanded="true" signature="2371:2428" placeholder="SELECT 1 FRO... clientmissingValue" />
-                <marker date="1453519036462" expanded="true" signature="2371:2474" placeholder="SELECT 1 FRO... client" />
-                <marker date="1453519036462" expanded="true" signature="2371:2475" placeholder="SELECT 1 FRO... client" />
-                <marker date="1453519036462" expanded="true" signature="2371:2521" placeholder="SELECT 1 FRO... client" />
-                <marker date="1453519036462" expanded="true" signature="2371:2552" placeholder="SELECT 1 FRO... client" />
-                <marker date="1453519036462" expanded="true" signature="2371:2570" placeholder="SELECT 1 FRO... client" />
-                <marker date="1453519036462" expanded="true" signature="2371:2603" placeholder="SELECT 1 FRO... client" />
-              </folding>
+              <caret line="51" column="35" selection-start-line="51" selection-start-column="35" selection-end-line="51" selection-end-column="35" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -66,7 +52,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/cmi/bdo/oauth/web/rest/Authentication.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="38" column="31" selection-start-line="38" selection-start-column="31" selection-end-line="38" selection-end-column="31" />
+              <caret line="28" column="4" selection-start-line="28" selection-start-column="4" selection-end-line="28" selection-end-column="77" />
               <folding />
             </state>
           </provider>
@@ -76,10 +62,33 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/cmi/bdo/oauth/web/rest/Login.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="27" column="31" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="31" />
+              <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AuthenticationService.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cmi/bdo/oauth/service/AuthenticationService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.22942206">
+              <caret line="50" column="35" selection-start-line="50" selection-start-column="35" selection-end-line="50" selection-end-column="35" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <marker date="1453531213531" expanded="true" signature="854:1066" placeholder="SELECT 1 FRO... client" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Constants.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cmi/bdo/oauth/config/Constants.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="28" column="62" selection-start-line="28" selection-start-column="31" selection-end-line="28" selection-end-column="62" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -96,11 +105,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="login.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="login.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/scripts/app/login/login.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.20446096">
-              <caret line="5" column="9" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
+            <state vertical-scroll-proportion="-9.225806">
+              <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -161,10 +170,8 @@
         <option value="$PROJECT_DIR$/src/main/java/cmi/bdo/oauth/validation/annotation/ValidClientKey.java" />
         <option value="$PROJECT_DIR$/src/main/resources/config/application.yml" />
         <option value="$PROJECT_DIR$/src/main/java/cmi/bdo/oauth/web/dto/AuthResponseDTO.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cmi/bdo/oauth/config/Constants.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/scripts/app/auth/auth.js" />
         <option value="$PROJECT_DIR$/src/main/java/cmi/bdo/oauth/validation/annotation/ValidateAuthParams.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cmi/bdo/oauth/validation/validator/AuthValidator.java" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/index.html" />
         <option value="$PROJECT_DIR$/src/main/webapp/scripts/app/login/login.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/scripts/app/auth/auth.controller.js" />
@@ -172,6 +179,9 @@
         <option value="$PROJECT_DIR$/src/main/webapp/scripts/app/login/login.html" />
         <option value="$PROJECT_DIR$/src/main/java/cmi/bdo/oauth/web/rest/Authentication.java" />
         <option value="$PROJECT_DIR$/src/main/java/cmi/bdo/oauth/web/rest/Login.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cmi/bdo/oauth/validation/validator/AuthValidator.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cmi/bdo/oauth/config/Constants.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cmi/bdo/oauth/service/AuthenticationService.java" />
       </list>
     </option>
   </component>
@@ -595,6 +605,66 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="rest" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bdo-oauth" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="BDO_OAUTH" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="oauth" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="validation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bdo-oauth" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="BDO_OAUTH" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="oauth" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="service" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1133,12 +1203,19 @@
       <workItem from="1453290241467" duration="3332000" />
       <workItem from="1453295134680" duration="6932000" />
       <workItem from="1453308048718" duration="7990000" />
-      <workItem from="1453509056348" duration="14091000" />
+      <workItem from="1453509056348" duration="17594000" />
     </task>
+    <task id="LOCAL-00001" summary="added the login page. the login form will now show if the client key and redirect uri are found in the database">
+      <created>1453524995142</created>
+      <option name="number" value="00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1453524995142</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="35122000" />
+    <option name="totallyTimeSpent" value="38625000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1060" extended-state="6" />
@@ -1146,13 +1223,13 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3303671" sideWeight="0.49785638" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3303671" sideWeight="0.49785638" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32814237" sideWeight="0.50321543" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32925472" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32814237" sideWeight="0.49678457" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32814237" sideWeight="0.49678457" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32925472" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32925472" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1356,14 +1433,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cmi/bdo/oauth/config/Constants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="7" selection-start-line="22" selection-start-column="7" selection-end-line="22" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/datasource/bdo_oauth.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-4.0485077">
@@ -1402,22 +1471,6 @@
           <caret line="17" column="23" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
           <folding>
             <element signature="n#!!doc" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cmi/bdo/oauth/validation/validator/AuthValidator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="72" column="33" selection-start-line="72" selection-start-column="33" selection-end-line="72" selection-end-column="33" />
-          <folding>
-            <marker date="1453519036462" expanded="true" signature="2371:2428" placeholder="SELECT 1 FRO... clientmissingValue" />
-            <marker date="1453519036462" expanded="true" signature="2371:2474" placeholder="SELECT 1 FRO... client" />
-            <marker date="1453519036462" expanded="true" signature="2371:2475" placeholder="SELECT 1 FRO... client" />
-            <marker date="1453519036462" expanded="true" signature="2371:2521" placeholder="SELECT 1 FRO... client" />
-            <marker date="1453519036462" expanded="true" signature="2371:2552" placeholder="SELECT 1 FRO... client" />
-            <marker date="1453519036462" expanded="true" signature="2371:2570" placeholder="SELECT 1 FRO... client" />
-            <marker date="1453519036462" expanded="true" signature="2371:2603" placeholder="SELECT 1 FRO... client" />
           </folding>
         </state>
       </provider>
@@ -1466,10 +1519,50 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/scripts/app/login/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.225806">
+          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-context/4.2.4.RELEASE/spring-context-4.2.4.RELEASE.jar!/org/springframework/stereotype/Service.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.40968344">
+          <caret line="18" column="18" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/javax/validation/validation-api/1.1.0.Final/validation-api-1.1.0.Final.jar!/javax/validation/ConstraintValidator.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.24581006">
+          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cmi/bdo/oauth/web/rest/Authentication.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="38" column="31" selection-start-line="38" selection-start-column="31" selection-end-line="38" selection-end-column="31" />
+          <caret line="28" column="4" selection-start-line="28" selection-start-column="4" selection-end-line="28" selection-end-column="77" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cmi/bdo/oauth/validation/validator/AuthValidator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="51" column="35" selection-start-line="51" selection-start-column="35" selection-end-line="51" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cmi/bdo/oauth/config/Constants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="28" column="62" selection-start-line="28" selection-start-column="31" selection-end-line="28" selection-end-column="62" />
           <folding />
         </state>
       </provider>
@@ -1477,18 +1570,21 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/cmi/bdo/oauth/web/rest/Login.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="27" column="31" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="31" />
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/scripts/app/login/login.html">
+    <entry file="file://$PROJECT_DIR$/src/main/java/cmi/bdo/oauth/service/AuthenticationService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.20446096">
-          <caret line="5" column="9" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
-          <folding />
+        <state vertical-scroll-proportion="0.22942206">
+          <caret line="50" column="35" selection-start-line="50" selection-start-column="35" selection-end-line="50" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <marker date="1453531213531" expanded="true" signature="854:1066" placeholder="SELECT 1 FRO... client" />
+          </folding>
         </state>
       </provider>
     </entry>

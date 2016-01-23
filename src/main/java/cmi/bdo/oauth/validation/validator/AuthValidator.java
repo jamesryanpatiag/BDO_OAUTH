@@ -1,19 +1,13 @@
 package cmi.bdo.oauth.validation.validator;
 
 import cmi.bdo.oauth.config.Constants;
+import cmi.bdo.oauth.service.AuthenticationService;
 import cmi.bdo.oauth.validation.annotation.ValidateAuthParams;
 import cmi.bdo.oauth.web.dto.AuthResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
-import javax.annotation.PostConstruct;
-import javax.sql.DataSource;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 /**
  * @author Jonathan Leijendekker
@@ -21,15 +15,10 @@ import java.sql.SQLException;
  *         Time: 10:26 PM
  */
 
-public class AuthValidator extends JdbcDaoSupport implements ConstraintValidator<ValidateAuthParams, AuthResponseDTO> {
+public class AuthValidator implements ConstraintValidator<ValidateAuthParams, AuthResponseDTO> {
 
     @Autowired
-    private DataSource dataSource;
-
-    @PostConstruct
-    private void initialize() {
-        setDataSource(dataSource);
-    }
+    private AuthenticationService authenticationSerce;
 
     @Override
     public void initialize(ValidateAuthParams validateAuthParams) {
@@ -58,10 +47,8 @@ public class AuthValidator extends JdbcDaoSupport implements ConstraintValidator
             return false;
         } else {
 
-            int clientKey = 0;
-
             try {
-                clientKey = Integer.parseInt(authResponseDTO.getClientKey());
+                Integer.parseInt(authResponseDTO.getClientKey());
             } catch (Exception e) {
                 constraintValidatorContext
                         .buildConstraintViolationWithTemplate(Constants.INVALID_CLIENTKEY_FORMAT)
@@ -69,59 +56,9 @@ public class AuthValidator extends JdbcDaoSupport implements ConstraintValidator
                 return false;
             }
 
-            final String sql = "SELECT 1" +
-                    "   FROM bdo_oauth.client" +
-                    " WHERE client_key = ? " +
-                    "   AND client_uri = ?" +
-                    "   AND client_active = 1" +
-                    " LIMIT 1; ";
-
-            PreparedStatement ps = null;
-
-            ResultSet rs = null;
-
-            final Connection conn = getConnection();
-
-            try {
-                ps = conn.prepareStatement(sql);
-                ps.setInt(1, clientKey);
-                ps.setString(2, authResponseDTO.getRedirectUri());
-
-                rs = ps.executeQuery();
-
-                if (rs != null) {
-                    if (rs.next())
-                        return true;
-
-                    // return an error message if the resultset did not returned a row
-                    constraintValidatorContext
-                            .buildConstraintViolationWithTemplate("Client key and Redirect URI was not found")
-                            .addConstraintViolation();
-                    return false;
-                }
-
-            } catch (SQLException e) {
-                e.printStackTrace();
-
-                constraintValidatorContext
-                        .buildConstraintViolationWithTemplate("Exception thrown: " + e.getMessage())
-                        .addConstraintViolation();
-                return false;
-            } finally {
-                try {
-                    if (ps != null || !ps.isClosed())
-                        ps.close();
-                    if (rs != null || !rs.isClosed())
-                        rs.close();
-                    if (conn != null || !conn.isClosed())
-                        conn.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+            return authenticationSerce.isValidClient(authResponseDTO, constraintValidatorContext);
 
         }
-        return false;
     }
 
 }

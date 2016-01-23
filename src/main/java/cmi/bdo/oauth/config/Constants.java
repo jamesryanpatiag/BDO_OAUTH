@@ -26,5 +26,6 @@ public class Constants {
     public static final String BLANK_CLIENTKEY = "Client ID/key can't be null or blank";
     public static final String INVALID_CLIENTKEY_FORMAT = "Invalid client key format";
     public static final String BLANK_REDIRECTURI = "Redirect URI can't be null or blank";
+    public static final String CLIENTKEY_REDIRECTURI_NOT_FOUND = "Client key and Redirect URI was not found";
 
 }
