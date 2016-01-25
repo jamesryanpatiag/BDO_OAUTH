@@ -18,7 +18,7 @@ import javax.validation.ConstraintValidatorContext;
 public class AuthValidator implements ConstraintValidator<ValidAuthParams, AuthResponseDTO> {
 
     @Autowired
-    private AuthenticationService authenticationSerce;
+    private AuthenticationService authenticationService;
 
     @Override
     public void initialize(ValidAuthParams validAuthParams) {
@@ -56,7 +56,7 @@ public class AuthValidator implements ConstraintValidator<ValidAuthParams, AuthR
                 return false;
             }
 
-            return authenticationSerce.isValidClient(authResponseDTO, constraintValidatorContext);
+            return authenticationService.isValidClient(authResponseDTO, constraintValidatorContext);
 
         }
     }

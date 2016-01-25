@@ -1,22 +1,54 @@
-package cmi.bdo.oauth.web.dto;
+package cmi.bdo.oauth.domain;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 /**
  * @author Jonathan Leijendekker
- *         Date: 01/24/2016
- *         Time: 11:33 PM
+ *         Date: 01/25/2016
+ *         Time: 11:41 PM
  */
-public class UserDTO {
 
+@Entity
+@Table(schema = "bdo_oauth", name = "user")
+public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "user_id", nullable = false, unique = true)
     private Long id;
+
+    @NotNull
+    @Column(name = "user_name", nullable = false)
     private String userName;
+
+    @NotNull
+    @Column(name = "user_first", nullable = false)
     private String firstName;
+
+    @Column(name = "user_middle")
     private String middleName;
+
+    @Column(name = "user_last", nullable = false)
     private String lastName;
+
+    @NotNull
+    @Column(name = "user_email", nullable = false)
     private String email;
+
+    @Column(name = "user_password")
     private String password;
+
+    @Column(name = "user_active")
     private Integer active;
+
+    @Column(name = "user_ldap")
     private Integer ldap;
+
+    @Column(name = "user_created")
     private String created;
+
+    @Column(name = "user_updated")
     private String updated;
 
     public Long getId() {
@@ -106,4 +138,5 @@ public class UserDTO {
     public void setUpdated(String updated) {
         this.updated = updated;
     }
+
 }

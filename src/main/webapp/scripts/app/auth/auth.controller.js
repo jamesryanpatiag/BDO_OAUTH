@@ -22,6 +22,10 @@ angular.module('bdo_oauth')
                         location: false
                     });
                 }, function(data) {
-                    $scope.auth.status = data.data.errors[0].defaultMessage;
+                    console.log(data)
+                    if(data.status == 500)
+                        $scope.auth.status = data.data.error;
+                    else
+                        $scope.auth.status = data.data.errors[0].defaultMessage;
                 });
     }]);

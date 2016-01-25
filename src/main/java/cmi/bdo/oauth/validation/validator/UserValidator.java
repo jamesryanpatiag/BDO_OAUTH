@@ -10,7 +10,6 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
-import java.sql.SQLException;
 
 /**
  * @author Jonathan Leijendekker
@@ -44,7 +43,7 @@ public class UserValidator implements ConstraintValidator<ValidUser, LoginDTO> {
 
             return false;
 
-        } catch (UnsupportedEncodingException | NoSuchAlgorithmException | SQLException e) {
+        } catch (UnsupportedEncodingException | NoSuchAlgorithmException e) {
             e.printStackTrace();
             constraintValidatorContext
                     .buildConstraintViolationWithTemplate(Constants.VALID_USER_LOGIN_ERROR)

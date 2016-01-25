@@ -1,5 +1,6 @@
 package cmi.bdo.oauth.web.rest;
 
+import cmi.bdo.oauth.domain.Client;
 import cmi.bdo.oauth.repository.ClientRepository;
 import cmi.bdo.oauth.web.dto.LoginAuthContextDTO;
 import org.slf4j.Logger;
@@ -37,7 +38,7 @@ public class Login {
         /**
          * Generate unique code here and add to the session table
          */
-        clientRepository.findByKey(Integer.parseInt(loginAuthContextDTO.getAuthResponseDTO().getClientKey()));
+        Client client = clientRepository.findOneByKey(Integer.parseInt(loginAuthContextDTO.getAuthResponseDTO().getClientKey()));
 
         return loginAuthContextDTO.getAuthResponseDTO().getRedirectUri();
     }

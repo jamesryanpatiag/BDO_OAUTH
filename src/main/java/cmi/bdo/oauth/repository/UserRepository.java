@@ -1,14 +1,8 @@
 package cmi.bdo.oauth.repository;
 
-import cmi.bdo.oauth.repository.mapper.UserMapper;
-import cmi.bdo.oauth.web.dto.UserDTO;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.support.JdbcDaoSupport;
-import org.springframework.stereotype.Repository;
-
-import javax.annotation.PostConstruct;
-import javax.sql.DataSource;
-import java.util.List;
+import cmi.bdo.oauth.domain.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 /**
  * @author Jonathan Leijendekker
@@ -16,31 +10,9 @@ import java.util.List;
  *         Time: 11:39 PM
  */
 
-@Repository
-public class UserRepository extends JdbcDaoSupport {
+public interface UserRepository extends JpaRepository<User, Long> {
 
-    @Autowired
-    private DataSource dataSource;
-
-    @PostConstruct
-    private void initialize() {
-        setDataSource(dataSource);
-    }
-
-    public List<UserDTO> findByUsernameAndPassword(String username, String password) {
-
-        final String sql = "SELECT * " +
-                "   FROM bdo_oauth.user " +
-                " WHERE user_name = ? " +
-                "   AND user_password = ? " +
-                "   AND user_active = 1; ";
-
-        List<UserDTO> userDTO = getJdbcTemplate().query(sql,
-                new UserMapper(),
-                new Object[]{username, password});
-
-        return userDTO;
-
-    }
+    @Query("SELECT u FROM User u WHERE user_name = ?1 AND user_password = ?2 AND user_active = 1")
+    User findOneByUsernameAndPassword(String username, String password);
 
 }

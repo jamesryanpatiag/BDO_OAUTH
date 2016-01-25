@@ -1,10 +1,10 @@
 package cmi.bdo.oauth.service;
 
 import cmi.bdo.oauth.config.Constants;
+import cmi.bdo.oauth.domain.Client;
 import cmi.bdo.oauth.repository.ClientRepository;
 import cmi.bdo.oauth.util.DomainUtil;
 import cmi.bdo.oauth.web.dto.AuthResponseDTO;
-import cmi.bdo.oauth.web.dto.ClientDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,11 +24,11 @@ public class AuthenticationService {
 
     public boolean isValidClient(AuthResponseDTO authResponseDTO, ConstraintValidatorContext constraintValidatorContext) {
 
-        ClientDTO clientDTO = clientRepository.findByKey(Integer.parseInt(authResponseDTO.getClientKey()));
+        Client client = clientRepository.findOneByKey(Integer.parseInt(authResponseDTO.getClientKey()));
 
-        if (clientDTO != null) {
+        if (client != null) {
 
-            String clientDomain = DomainUtil.getDomain(clientDTO.getUri());
+            String clientDomain = DomainUtil.getDomain(client.getUri());
             String redirectUriDomain = DomainUtil.getDomain(authResponseDTO.getRedirectUri());
 
             if (clientDomain == null || redirectUriDomain == null) {
