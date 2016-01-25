@@ -2,7 +2,7 @@ package cmi.bdo.oauth.validation.validator;
 
 import cmi.bdo.oauth.config.Constants;
 import cmi.bdo.oauth.service.AuthenticationService;
-import cmi.bdo.oauth.validation.annotation.ValidateAuthParams;
+import cmi.bdo.oauth.validation.annotation.ValidAuthParams;
 import cmi.bdo.oauth.web.dto.AuthResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -15,13 +15,13 @@ import javax.validation.ConstraintValidatorContext;
  *         Time: 10:26 PM
  */
 
-public class AuthValidator implements ConstraintValidator<ValidateAuthParams, AuthResponseDTO> {
+public class AuthValidator implements ConstraintValidator<ValidAuthParams, AuthResponseDTO> {
 
     @Autowired
     private AuthenticationService authenticationSerce;
 
     @Override
-    public void initialize(ValidateAuthParams validateAuthParams) {
+    public void initialize(ValidAuthParams validAuthParams) {
 
     }
 

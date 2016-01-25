@@ -1,6 +1,6 @@
 package cmi.bdo.oauth.web.dto;
 
-import cmi.bdo.oauth.validation.annotation.ValidateAuthParams;
+import cmi.bdo.oauth.validation.annotation.ValidAuthParams;
 
 /**
  * @author Jonathan Leijendekker
@@ -8,7 +8,7 @@ import cmi.bdo.oauth.validation.annotation.ValidateAuthParams;
  *         Time: 10:14 PM
  */
 
-@ValidateAuthParams
+@ValidAuthParams
 public class AuthResponseDTO {
 
     private String clientKey;

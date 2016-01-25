@@ -1,17 +1,14 @@
 package cmi.bdo.oauth.service;
 
 import cmi.bdo.oauth.config.Constants;
+import cmi.bdo.oauth.repository.ClientRepository;
+import cmi.bdo.oauth.util.DomainUtil;
 import cmi.bdo.oauth.web.dto.AuthResponseDTO;
+import cmi.bdo.oauth.web.dto.ClientDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import javax.sql.DataSource;
 import javax.validation.ConstraintValidatorContext;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 /**
  * @author Jonathan Leijendekker
@@ -20,64 +17,37 @@ import java.sql.SQLException;
  */
 
 @Service
-@Transactional
 public class AuthenticationService {
 
     @Autowired
-    private DataSource dataSource;
+    private ClientRepository clientRepository;
 
     public boolean isValidClient(AuthResponseDTO authResponseDTO, ConstraintValidatorContext constraintValidatorContext) {
-        final String sql = "SELECT 1" +
-                "   FROM bdo_oauth.client" +
-                " WHERE client_key = ? " +
-                "   AND client_uri = ?" +
-                "   AND client_active = 1" +
-                " LIMIT 1; ";
 
-        PreparedStatement ps = null;
+        ClientDTO clientDTO = clientRepository.findByKey(Integer.parseInt(authResponseDTO.getClientKey()));
 
-        ResultSet rs = null;
+        if (clientDTO != null) {
 
-        Connection conn = null;
+            String clientDomain = DomainUtil.getDomain(clientDTO.getUri());
+            String redirectUriDomain = DomainUtil.getDomain(authResponseDTO.getRedirectUri());
 
-        try {
-
-            conn = dataSource.getConnection();
-
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1, Integer.parseInt(authResponseDTO.getClientKey()));
-            ps.setString(2, authResponseDTO.getRedirectUri());
-
-            rs = ps.executeQuery();
-
-            if (rs != null) {
-                if (rs.next())
-                    return true;
-
-                // return an error message if the resultset did not returned a row
+            if (clientDomain == null || redirectUriDomain == null) {
                 constraintValidatorContext
-                        .buildConstraintViolationWithTemplate(Constants.CLIENTKEY_REDIRECTURI_NOT_FOUND)
+                        .buildConstraintViolationWithTemplate(Constants.ERROR_PARSING_DOMAIN)
                         .addConstraintViolation();
                 return false;
             }
 
-            return false;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (ps != null || !ps.isClosed())
-                    ps.close();
-                if (rs != null || !rs.isClosed())
-                    rs.close();
-                if (conn != null || !conn.isClosed())
-                    conn.close();
-            } catch (SQLException e1) {
-                e1.printStackTrace();
-            }
+            if (clientDomain.equals(redirectUriDomain))
+                return true;
+
         }
 
+        constraintValidatorContext
+                .buildConstraintViolationWithTemplate(Constants.CLIENTKEY_REDIRECTURI_NOT_FOUND)
+                .addConstraintViolation();
         return false;
+
     }
 
 }

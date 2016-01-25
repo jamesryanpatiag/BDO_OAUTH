@@ -15,7 +15,7 @@ angular.module('bdo_oauth')
 
            $http.post('api/v1/authenticate', $scope.auth)
                 .then(function(data) {
-                    $state.go('login', {
+                    $state.transitionTo('login', {
                         clientKey: data.data.clientKey,
                         redirectUri: data.data.redirectUri
                     }, {

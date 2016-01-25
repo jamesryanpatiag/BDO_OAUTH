@@ -14,9 +14,9 @@ import java.lang.annotation.*;
 
 @Documented
 @Constraint(validatedBy = {AuthValidator.class})
-@Target({ElementType.TYPE})
+@Target({ElementType.TYPE, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ValidateAuthParams {
+public @interface ValidAuthParams {
 
     String message() default "{cmi.bdo.oauth.validation.validator.AuthValidator}";
 

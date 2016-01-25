@@ -27,5 +27,10 @@ public class Constants {
     public static final String INVALID_CLIENTKEY_FORMAT = "Invalid client key format";
     public static final String BLANK_REDIRECTURI = "Redirect URI can't be null or blank";
     public static final String CLIENTKEY_REDIRECTURI_NOT_FOUND = "Client key and Redirect URI was not found";
+    public static final String ERROR_PARSING_DOMAIN = "Error in parsing the uri";
+    public static final String INVALID_CREDENTIALS = "Invalid login credentials";
+    public static final String VALID_USER_LOGIN_ERROR = "Cannot login at the moment. Please try again later";
+
+    public static final String SUCCESS = "Success";
 
 }

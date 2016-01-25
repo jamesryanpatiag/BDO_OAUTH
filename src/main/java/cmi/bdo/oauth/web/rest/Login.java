@@ -1,16 +1,16 @@
 package cmi.bdo.oauth.web.rest;
 
+import cmi.bdo.oauth.repository.ClientRepository;
+import cmi.bdo.oauth.web.dto.LoginAuthContextDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.jdbc.core.support.JdbcDaoSupport;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.PostConstruct;
-import javax.sql.DataSource;
+import javax.validation.Valid;
 
 /**
  * @author Jonathan Leijendekker
@@ -20,22 +20,26 @@ import javax.sql.DataSource;
 
 @RestController
 @RequestMapping("api/v1/login")
-public class Login extends JdbcDaoSupport {
+public class Login {
 
     private final Logger log = LoggerFactory.getLogger(Login.class);
 
     @Autowired
-    private DataSource dataSource;
-
-    @PostConstruct
-    private void initialize() {
-        setDataSource(dataSource);
-    }
+    private ClientRepository clientRepository;
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity login() {
+    public String login(@Valid @RequestBody LoginAuthContextDTO loginAuthContextDTO) {
 
-        return null;
+        log.info("User with the username: {} logged in successfully", loginAuthContextDTO.getLoginDTO().getUsername());
+
+        log.info("Generating unique code..");
+
+        /**
+         * Generate unique code here and add to the session table
+         */
+        clientRepository.findByKey(Integer.parseInt(loginAuthContextDTO.getAuthResponseDTO().getClientKey()));
+
+        return loginAuthContextDTO.getAuthResponseDTO().getRedirectUri();
     }
 
 }

@@ -1,16 +1,11 @@
 package cmi.bdo.oauth.security;
 
-import javax.crypto.*;
-import javax.crypto.spec.IvParameterSpec;
-import javax.crypto.spec.PBEKeySpec;
+import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
-import javax.xml.bind.DatatypeConverter;
 import java.io.UnsupportedEncodingException;
-import java.security.AlgorithmParameters;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
-import java.util.UUID;
 
 /**
  * An encryption utility to encrypt strings to sha-256 or sha-512 hash format.
@@ -110,74 +105,46 @@ public class Encryptor {
     }
 
     // ===================================
-    // AES-256 encryption
+    // AES encryption
     // ===================================
-    private static int iterations = 65536;
-    private static int keySize = 256;
-    private static byte[] ivBytes;
 
-    private static SecretKey secretKey;
+    private static byte[] key = {
+            0x2d, 0x2a, 0x2d, 0x42, 0x55, 0x49, 0x4c, 0x44, 0x41, 0x43, 0x4f, 0x44, 0x45, 0x2d, 0x2a, 0x2d
+    };
 
-    /**
-     * Encrypt the text using AES
-     *
-     * @param text
-     * @return
-     * @throws Exception
-     */
-    public static String aesEncrypt(String text) throws Exception {
-
-        keySize = Cipher.getMaxAllowedKeyLength("AES");
-
-        if(keySize > 256)
-            keySize = 256;
-
-        char[] plaintext = text.toCharArray();
-
-        byte[] saltBytes = UUID.randomUUID().toString().getBytes();
-
-        SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-        PBEKeySpec spec = new PBEKeySpec(plaintext, saltBytes, iterations, keySize);
-        secretKey = skf.generateSecret(spec);
-        SecretKeySpec secretSpec = new SecretKeySpec(secretKey.getEncoded(), "AES");
-
-        Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-        cipher.init(Cipher.ENCRYPT_MODE, secretSpec);
-        AlgorithmParameters params = cipher.getParameters();
-        ivBytes = params.getParameterSpec(IvParameterSpec.class).getIV();
-        byte[] encryptedTextBytes = cipher.doFinal(String.valueOf(plaintext).getBytes("UTF-8"));
-
-        return DatatypeConverter.printBase64Binary(encryptedTextBytes);
+    public static String encrypt(String plainText) {
+        return getAesValue(plainText, Cipher.ENCRYPT_MODE);
     }
 
-    /**
-     * Decrypt the encrypted text using AES
-     *
-     * @param text
-     * @return
-     * @throws Exception
-     */
-    public static String aesDecrypt(String text) throws Exception {
+    public static String decrypt(String encryptedText) {
+        return getAesValue(encryptedText, Cipher.DECRYPT_MODE);
+    }
 
-        char[] encryptedText = text.toCharArray();
-
-        byte[] encryptedTextBytes = DatatypeConverter.parseBase64Binary(new String(encryptedText));
-        SecretKeySpec secretSpec = new SecretKeySpec(secretKey.getEncoded(), "AES");
-
-        Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-        cipher.init(Cipher.DECRYPT_MODE, secretSpec, new IvParameterSpec(ivBytes));
-
-        byte[] decryptedTextBytes = null;
+    private static String getAesValue(String text, int mode) {
+        String value = null;
 
         try {
-            decryptedTextBytes = cipher.doFinal(encryptedTextBytes);
-        }   catch (IllegalBlockSizeException e) {
-            e.printStackTrace();
-        }   catch (BadPaddingException e) {
+            Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5PADDING");
+            SecretKeySpec secretKey = new SecretKeySpec(key, "AES");
+            cipher.init(mode, secretKey);
+
+            byte[] cipherText;
+
+            if (mode == Cipher.ENCRYPT_MODE) {
+                cipherText = cipher.doFinal(text.getBytes("UTF8"));
+                value = new String(Base64.getEncoder().encode(cipherText), "UTF-8");
+            } else if (mode == Cipher.DECRYPT_MODE) {
+                cipherText = Base64.getDecoder().decode(text.getBytes("UTF8"));
+                value = new String(cipher.doFinal(cipherText), "UTF-8");
+            }
+
+            return value;
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return new String(decryptedTextBytes);
+        return null;
 
     }
+
 }

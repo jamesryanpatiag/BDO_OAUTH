@@ -5,10 +5,29 @@
  */
 
  angular.module('bdo_oauth')
-    .controller('LoginController', ['$scope', '$state', '$stateParams', function($scope, $state, $stateParams) {
-        $scope.auth = $stateParams;
+    .controller('LoginController', ['$scope', '$http', '$stateParams', '$window', function($scope, $http, $stateParams, $window) {
+        $scope.user = {};
 
         $scope.login = function() {
-            console.log("LOGGING IN")
+
+            $scope.error = "";
+
+            $scope.loginForm = {
+                authResponseDTO: {
+                    clientKey: $stateParams.clientKey,
+                    redirectUri: $stateParams.redirectUri
+                },
+                loginDTO: {
+                    username: $scope.user.username,
+                    password: $scope.user.password
+                }
+            }
+
+            $http.post('api/v1/login', $scope.loginForm)
+                 .then(function(data) {
+                    $window.location = data.data;
+                 }, function(data) {
+                    $scope.error = data.data.errors[0].defaultMessage;
+                 });
         }
     }]);
