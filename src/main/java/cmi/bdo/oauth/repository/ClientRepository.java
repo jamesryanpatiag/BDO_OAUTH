@@ -12,7 +12,7 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface ClientRepository extends JpaRepository<Client, Long> {
 
-    @Query("SELECT c FROM Client c WHERE client_keys = ?1 AND client_active = 1")
+    @Query("SELECT c FROM Client c WHERE client_key = ?1 AND client_active = 1")
     Client findOneByKey(Integer key);
 
 }
