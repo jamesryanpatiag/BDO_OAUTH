@@ -1,7 +1,10 @@
 package cmi.bdo.oauth;
 
+import cmi.bdo.oauth.util.DateUtil;
+
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.time.ZonedDateTime;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -23,7 +26,19 @@ public class TimeTest {
 
         System.out.println(newDate);
 
-        ZonedDateTime time = ZonedDateTime.parse(newDate);
-        System.out.println(time);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        calendar.add(Calendar.HOUR_OF_DAY, 2);
+
+        Date tomorrow = calendar.getTime();
+
+        System.out.println(DateUtil.zonedDateTIme(tomorrow));
+
+        Timestamp timestamp = new Timestamp(new Date(DateUtil.zonedDateTIme(tomorrow)).getMinutes());
+
+        System.out.println(timestamp);
+
+//        ZonedDateTime time = ZonedDateTime.parse(newDate);
+      //  System.out.println(time);
     }
 }

@@ -27,7 +27,12 @@
                  .then(function(data) {
                     $window.location = data.data;
                  }, function(data) {
-                    $scope.error = data.data.errors[0].defaultMessage;
+                    if(data.data.errors)
+                        $scope.error = data.data.errors[0].defaultMessage;
+                    else if(data.data.error)
+                        $scope.error = data.data.error;
+                    else
+                        $scope.error = data.statusText;
                  });
         }
     }]);

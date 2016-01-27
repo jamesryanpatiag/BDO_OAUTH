@@ -37,4 +37,22 @@ public class DomainUtil {
         return domain;
     }
 
+    public static URI appendUri(String uri, String appendQuery) throws URISyntaxException {
+        URI oldUri = new URI(uri);
+
+        String newQuery = oldUri.getQuery();
+        if (newQuery == null) {
+            newQuery = appendQuery;
+        } else if (oldUri.toString().endsWith(appendQuery.substring(0, appendQuery.indexOf("=") + 1))) {
+            newQuery += appendQuery.substring(appendQuery.indexOf("=") + 1, appendQuery.length());
+        } else {
+            newQuery += "&" + appendQuery;
+        }
+
+        URI newUri = new URI(oldUri.getScheme(), oldUri.getAuthority(),
+                oldUri.getPath(), newQuery, oldUri.getFragment());
+
+        return newUri;
+    }
+
 }
