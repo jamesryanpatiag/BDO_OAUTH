@@ -1,6 +1,7 @@
 package cmi.bdo.oauth.web.rest;
 
 import cmi.bdo.oauth.domain.Client;
+import cmi.bdo.oauth.domain.ResponseData;
 import cmi.bdo.oauth.domain.Session;
 import cmi.bdo.oauth.domain.User;
 import cmi.bdo.oauth.repository.ClientRepository;
@@ -45,8 +46,8 @@ public class Login {
     @Autowired
     private SessionRepository sessionRepository;
 
-    @RequestMapping(method = RequestMethod.POST, produces = "text/plain")
-    public String login(@Valid @RequestBody LoginAuthContextDTO loginAuthContextDTO) throws UnsupportedEncodingException, NoSuchAlgorithmException, URISyntaxException {
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseData login(@Valid @RequestBody LoginAuthContextDTO loginAuthContextDTO) throws UnsupportedEncodingException, NoSuchAlgorithmException, URISyntaxException {
 
         log.info("User with the username: '{}' logged in successfully", loginAuthContextDTO.getLoginDTO().getUsername());
 
@@ -77,11 +78,13 @@ public class Login {
         session.setUser(user.getId());
         session.setCode(code);
 
-        sessionRepository.saveSession(session);
+        sessionRepository.delete(session);
+
+        sessionRepository.save(session);
 
         log.info("Added user '{}' with the client key '{}' to the database", user.getUserName(), client.getKey());
 
-        return redirectUri;
+        return new ResponseData(redirectUri);
 
     }
 

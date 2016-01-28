@@ -24,7 +24,7 @@ public class Session implements Serializable {
     private Long client;
 
     @NotNull
-    @Column(name = "\"session_user\"", nullable = false)
+    @Column(name = "session_user_id", nullable = false)
     private Long user;
 
     @NotNull

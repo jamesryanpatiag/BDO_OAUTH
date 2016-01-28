@@ -28,7 +28,6 @@ public class UserValidator implements ConstraintValidator<ValidUser, LoginDTO> {
 
     @Override
     public boolean isValid(LoginDTO loginDTO, ConstraintValidatorContext constraintValidatorContext) {
-
         constraintValidatorContext.disableDefaultConstraintViolation();
 
         try {

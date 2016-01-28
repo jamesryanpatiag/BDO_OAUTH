@@ -23,16 +23,20 @@
                 }
             }
 
-            $http.post('api/v1/login', $scope.loginForm)
-                 .then(function(data) {
-                    $window.location = data.data;
-                 }, function(data) {
-                    if(data.data.errors)
-                        $scope.error = data.data.errors[0].defaultMessage;
-                    else if(data.data.error)
-                        $scope.error = data.data.error;
-                    else
-                        $scope.error = data.statusText;
-                 });
+            $http({
+                method: "POST",
+                url: "api/v1/login",
+                data: $scope.loginForm
+            }).then(function(data) {
+               $window.location = data.data.value;
+            }, function(data) {
+               if(data.data.errors)
+                   $scope.error = data.data.errors[0].defaultMessage;
+               else if(data.data.error)
+                   $scope.error = data.data.error;
+               else
+                   $scope.error = data.statusText;
+            });
+
         }
     }]);

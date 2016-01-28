@@ -40,6 +40,7 @@ public class AuthValidator implements ConstraintValidator<ValidAuthParams, AuthR
             return false;
         } else if (authResponseDTO.getRedirectUri() == null ||
                 authResponseDTO.getRedirectUri().trim().length() == 0) {
+
             constraintValidatorContext
                     .buildConstraintViolationWithTemplate(Constants.BLANK_REDIRECTURI)
                     .addConstraintViolation();

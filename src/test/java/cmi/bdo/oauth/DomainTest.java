@@ -1,7 +1,6 @@
 package cmi.bdo.oauth;
 
-import cmi.bdo.oauth.util.DomainUtil;
-
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 
 /**
@@ -11,14 +10,14 @@ import java.net.URISyntaxException;
  */
 public class DomainTest {
 
-    public static void main(String[] args) throws URISyntaxException {
-        String url = "http://www.domainsample.com/?name=";
+    public static void main(String[] args) throws URISyntaxException, MalformedURLException {
+        String url = "localhost:8000/?name=asd";
 
-        String domain = DomainUtil.getDomain(url);
+        //String domain = DomainServiceUtil.getDomain(url);
 
-        System.out.println(domain);
+        //System.out.println(domain);
 
-        String appendedUri = DomainUtil.appendUri(url, "name=Jonathan").toString();
+        String appendedUri = DomainServiceUtil.appendUri(url, "name=Jonathan").toString();
 
         System.out.println(appendedUri);
     }

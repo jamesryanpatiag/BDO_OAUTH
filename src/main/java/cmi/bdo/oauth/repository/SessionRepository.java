@@ -25,13 +25,23 @@ public class SessionRepository extends JdbcDaoSupport {
         setDataSource(dataSource);
     }
 
+    public void delete(Session session) {
 
-    public void saveSession(Session session) {
+        final String sql =
+                "DELETE FROM bdo_oauth.session " +
+                        "WHERE session_client = ? " +
+                        "  AND session_user_id = ?;";
+
+        getJdbcTemplate().update(sql, session.getClient(), session.getUser());
+
+    }
+
+    public void save(Session session) {
 
         final String sql =
                 "INSERT INTO bdo_oauth.session(" +
                         "session_client, " +
-                        "\"session_user\", " +
+                        "session_user_id, " +
                         "session_code, " +
                         "session_expire, " +
                         "session_created" +

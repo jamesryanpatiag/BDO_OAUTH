@@ -18,8 +18,7 @@ public class DomainUtil {
      */
     public static String getDomain(String url) {
 
-        if (!url.startsWith("http://") && !url.startsWith("https://"))
-            url = "http://" + url;
+        url = appendScheme(url);
 
         URI uri;
         try {
@@ -28,16 +27,19 @@ public class DomainUtil {
             uri = null;
         }
 
-        String hostUri = null;
-        if (uri != null) hostUri = uri.getHost();
+        String authority = null;
+        if (uri != null) authority = uri.getAuthority();
 
         String domain = null;
-        if (hostUri != null) domain = hostUri.startsWith("www.") ? hostUri.substring(4) : hostUri;
+        if (authority != null) domain = authority.startsWith("www.") ? authority.substring(4) : authority;
 
         return domain;
     }
 
     public static URI appendUri(String uri, String appendQuery) throws URISyntaxException {
+
+        uri = appendScheme(uri);
+
         URI oldUri = new URI(uri);
 
         String newQuery = oldUri.getQuery();
@@ -52,7 +54,17 @@ public class DomainUtil {
         URI newUri = new URI(oldUri.getScheme(), oldUri.getAuthority(),
                 oldUri.getPath(), newQuery, oldUri.getFragment());
 
+        //if (newUri.toString().startsWith("http://") || newUri.toString().startsWith("https://"))
+        //    newUri = new URI(newUri.toString().replaceFirst("http://|https://", ""));
+
         return newUri;
+    }
+
+    private static String appendScheme(String url) {
+        if (!url.startsWith("http://") && !url.startsWith("https://"))
+            url = "http://" + url;
+
+        return url;
     }
 
 }

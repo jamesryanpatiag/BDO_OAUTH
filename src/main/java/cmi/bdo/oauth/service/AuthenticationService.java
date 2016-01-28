@@ -41,11 +41,13 @@ public class AuthenticationService {
             if (clientDomain.equals(redirectUriDomain))
                 return true;
 
+
         }
 
         constraintValidatorContext
                 .buildConstraintViolationWithTemplate(Constants.CLIENTKEY_REDIRECTURI_NOT_FOUND)
                 .addConstraintViolation();
+
         return false;
 
     }
