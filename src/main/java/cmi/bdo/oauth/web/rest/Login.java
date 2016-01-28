@@ -48,9 +48,7 @@ public class Login {
     @RequestMapping(method = RequestMethod.POST, produces = "text/plain")
     public String login(@Valid @RequestBody LoginAuthContextDTO loginAuthContextDTO) throws UnsupportedEncodingException, NoSuchAlgorithmException, URISyntaxException {
 
-        log.info("User with the username: {} logged in successfully", loginAuthContextDTO.getLoginDTO().getUsername());
-
-        log.info("Generating unique code..");
+        log.info("User with the username: '{}' logged in successfully", loginAuthContextDTO.getLoginDTO().getUsername());
 
         Client client = clientRepository.findOneByKey(Integer.parseInt(loginAuthContextDTO.getAuthResponseDTO().getClientKey()));
 
@@ -74,10 +72,6 @@ public class Login {
 
         redirectUri = DomainUtil.appendUri(redirectUri, "code=".concat(code)).toString();
 
-        log.info("Done generating the code.");
-
-        log.info("Saving session to the database...");
-
         Session session = new Session();
         session.setClient(client.getId());
         session.setUser(user.getId());
@@ -85,7 +79,7 @@ public class Login {
 
         sessionRepository.saveSession(session);
 
-        log.info("Session was saved to the database. Sending redirect uri");
+        log.info("Added user '{}' with the client key '{}' to the database", user.getUserName(), client.getKey());
 
         return redirectUri;
 
