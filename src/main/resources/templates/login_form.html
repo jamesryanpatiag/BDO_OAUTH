@@ -1,0 +1,22 @@
+<div xmlns:th="http://www.thymeleaf.org">
+    <form th:action="@{/api/v1/auth(client_key=${param.client_key[0]}, redirect_uri=${param.redirect_uri[0]})}"
+          method="post">
+        <div>
+            <div>
+                Username:
+            </div>
+            <input type="text" name="username" th:value="${username}"/>
+        </div>
+        <div>
+            <div>
+                Password:
+            </div>
+            <input type="password" name="password" th:value="${password}"/>
+        </div>
+
+        <p th:text="${error}"></p>
+
+        <button type="submit">Submit</button>
+
+    </form>
+</div>

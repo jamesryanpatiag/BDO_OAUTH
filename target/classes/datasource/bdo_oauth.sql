@@ -106,7 +106,7 @@ CREATE TABLE bdo_oauth.session
 (
 	session_id bigserial NOT NULL,
 	session_client bigserial NOT NULL,
-	"session_user" bigserial NOT NULL,
+	session_user_id bigserial NOT NULL,
 	session_code character varying(255) NOT NULL,
 	session_expire timestamp with time zone NOT NULL,
 	session_created timestamp with time zone NOT NULL,

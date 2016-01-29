@@ -1,8 +1,15 @@
 package cmi.bdo.oauth.repository;
 
 import cmi.bdo.oauth.domain.User;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
+import cmi.bdo.oauth.domain.mapper.UserMapper;
+import cmi.bdo.oauth.security.Encryptor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.support.JdbcDaoSupport;
+import org.springframework.stereotype.Repository;
+
+import javax.annotation.PostConstruct;
+import javax.sql.DataSource;
 
 /**
  * @author Jonathan Leijendekker
@@ -10,9 +17,41 @@ import org.springframework.data.jpa.repository.Query;
  *         Time: 11:39 PM
  */
 
-public interface UserRepository extends JpaRepository<User, Long> {
+@Repository
+public class UserRepository extends JdbcDaoSupport {
 
-    @Query("SELECT u FROM User u WHERE user_name = ?1 AND user_password = ?2 AND user_active = 1")
-    User findOneByUsernameAndPassword(String username, String password);
+    @Autowired
+    private DataSource dataSource;
+
+    @PostConstruct
+    private void initialize() {
+        setDataSource(dataSource);
+    }
+
+    public User findOneByUsernameAndPassword(String username, String password) {
+
+        final String sql =
+                "SELECT * " +
+                        "       FROM bdo_oauth.user " +
+                        "   WHERE user_name = ? " +
+                        "     AND user_active = 1;";
+
+        User user;
+
+        try {
+            user = getJdbcTemplate().queryForObject(sql,
+                    new Object[]{username},
+                    new UserMapper());
+
+            if (!Encryptor.bcryptMatches(password, user.getPassword()))
+                return null;
+
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+
+        return user;
+
+    }
 
 }

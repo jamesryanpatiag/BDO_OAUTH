@@ -1,10 +1,13 @@
 package cmi.bdo.oauth.security;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.Base64;
 
 /**
@@ -145,6 +148,33 @@ public class Encryptor {
 
         return null;
 
+    }
+
+    public static String bcrypt(CharSequence charSequence) {
+
+        SecureRandom random;
+
+        try {
+            random = SecureRandom.getInstance("SHA1PRNG");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            random = new SecureRandom();
+        }
+
+        byte[] randomBytes = new byte[256];
+        random.nextBytes(randomBytes);
+
+        int seedByteCount = 5;
+        byte[] seed = random.generateSeed(seedByteCount);
+        random.setSeed(seed);
+
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16, random);
+        return encoder.encode(charSequence);
+
+    }
+
+    public static boolean bcryptMatches(CharSequence charSequence, String s) {
+        return new BCryptPasswordEncoder().matches(charSequence, s);
     }
 
 }

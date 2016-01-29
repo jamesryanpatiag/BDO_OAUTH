@@ -1,8 +1,14 @@
 package cmi.bdo.oauth.repository;
 
 import cmi.bdo.oauth.domain.Client;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
+import cmi.bdo.oauth.domain.mapper.ClientMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.support.JdbcDaoSupport;
+import org.springframework.stereotype.Repository;
+
+import javax.annotation.PostConstruct;
+import javax.sql.DataSource;
 
 /**
  * @author Jonathan Leijendekker
@@ -10,9 +16,36 @@ import org.springframework.data.jpa.repository.Query;
  *         Time: 6:55 PM
  */
 
-public interface ClientRepository extends JpaRepository<Client, Long> {
+@Repository
+public class ClientRepository extends JdbcDaoSupport {
 
-    @Query("SELECT c FROM Client c WHERE client_key = ?1 AND client_active = 1")
-    Client findOneByKey(Integer key);
+    @Autowired
+    private DataSource dataSource;
+
+    @PostConstruct
+    private void initialize() {
+        setDataSource(dataSource);
+    }
+
+    public Client findOneByKey(Integer key) {
+
+        final String sql =
+                "SELECT * " +
+                        "       FROM bdo_oauth.client " +
+                        "   WHERE client_key = ? " +
+                        "     AND client_active = 1;";
+
+        Client client;
+
+        try {
+            client = getJdbcTemplate().queryForObject(sql,
+                    new Object[]{key},
+                    new ClientMapper());
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+
+        return client;
+    }
 
 }

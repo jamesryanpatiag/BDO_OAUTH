@@ -3,7 +3,6 @@ package cmi.bdo.oauth.service;
 import cmi.bdo.oauth.config.Constants;
 import cmi.bdo.oauth.domain.User;
 import cmi.bdo.oauth.repository.UserRepository;
-import cmi.bdo.oauth.security.Encryptor;
 import cmi.bdo.oauth.web.dto.LoginDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,7 +32,7 @@ public class LoginService {
      * @throws NoSuchAlgorithmException
      * @throws SQLException
      */
-    public String validateUserLogin(LoginDTO loginDTO) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+    public String validateUserLogin(LoginDTO loginDTO) {
 
         if (loginDTO.getUsername() == null ||
                 loginDTO.getUsername().trim().length() == 0 ||
@@ -41,7 +40,7 @@ public class LoginService {
                 loginDTO.getPassword().trim().length() == 0)
             return Constants.INVALID_CREDENTIALS;
 
-        User user = userRepository.findOneByUsernameAndPassword(loginDTO.getUsername(), Encryptor.sha512(loginDTO.getPassword()));
+        User user = userRepository.findOneByUsernameAndPassword(loginDTO.getUsername(), loginDTO.getPassword());
 
         if (user != null)
             return Constants.SUCCESS;

@@ -1,7 +1,5 @@
 package cmi.bdo.oauth.domain;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -10,46 +8,17 @@ import java.io.Serializable;
  *         Time: 7:11 PM
  */
 
-@Entity
-@Table(schema = "bdo_oauth", name = "client")
 public class Client implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "client_id", nullable = false, unique = true)
     private Long id;
-
-    @NotNull
-    @Column(name = "client_app", nullable = false)
     private Long app;
-
-    @NotNull
-    @Column(name = "client_key", nullable = false, unique = true)
     private Integer key;
-
-    @NotNull
-    @Column(name = "client_secret", nullable = false, unique = true)
     private String secret;
-
-    @NotNull
-    @Column(name = "client_name", nullable = false)
     private String name;
-
-    @NotNull
-    @Column(name = "client_description", nullable = false)
     private String description;
-
-    @NotNull
-    @Column(name = "client_uri", nullable = false)
     private String uri;
-
-    @Column(name = "client_active")
     private Integer active;
-
-    @Column(name = "client_created")
     private String created;
-
-    @Column(name = "client_updated")
     private String updated;
 
     public Long getId() {

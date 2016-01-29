@@ -14,13 +14,6 @@ public class Constants {
     public static final String SPRING_PROFILE_PRODUCTION = "prod";
 
     /**
-     * TEMPLATES
-     */
-    public static final String TEMPLATE_PREFIX = "templates/";
-    public static final String TEMPLATE_SUFFIX = ".html";
-    public static final String TEMPLATE_MODE = "HTML5";
-
-    /**
      * ERROR MESSAGES
      */
     public static final String BLANK_CLIENTKEY = "Client ID/key can't be null or blank";

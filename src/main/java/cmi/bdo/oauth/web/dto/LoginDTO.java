@@ -1,14 +1,11 @@
 package cmi.bdo.oauth.web.dto;
 
-import cmi.bdo.oauth.validation.annotation.ValidUser;
-
 /**
  * @author Jonathan Leijendekker
  *         Date: 01/24/2016
  *         Time: 11:39 AM
  */
 
-@ValidUser
 public class LoginDTO {
 
     private String username;
