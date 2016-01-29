@@ -7,8 +7,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
         <version>0.0.1-SNAPSHOT</version>
-        <javax.persistence.version>1.0.0.Final</javax.persistence.version>
-        <hibernate.version>5.0.7.Final</hibernate.version>
     </properties>
 
 	<groupId>cmi.bdo.oauth</groupId>
