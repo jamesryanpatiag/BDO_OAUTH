@@ -23,10 +23,12 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="bdo-oauth" />
+        <module name="bdo_auth" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="bdo-oauth" target="1.8" />
+      <module name="bdo_auth" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

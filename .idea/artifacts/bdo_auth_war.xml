@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="bdo_auth:war">
+    <output-path>$PROJECT_DIR$/../bdo_auth/target</output-path>
+    <root id="archive" name="bdo-auth-0.0.1-SNAPSHOT.war">
+      <element id="artifact" artifact-name="bdo_auth:war exploded" />
+    </root>
+  </artifact>
+</component>

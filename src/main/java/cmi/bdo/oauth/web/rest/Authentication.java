@@ -55,6 +55,13 @@ public class Authentication {
     @Autowired
     private SessionRepository sessionRepository;
 
+    /**
+     * Check if the client key and redirect uri are valid
+     *
+     * @param clientKey
+     * @param redirectUri
+     * @return
+     */
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView authenticate(
             @RequestParam(value = "client_key", required = false) String clientKey,
@@ -76,6 +83,15 @@ public class Authentication {
         return modelAndView;
     }
 
+    /**
+     * Submit login form
+     *
+     * @param clientKey
+     * @param redirectUri
+     * @param username
+     * @param password
+     * @return
+     */
     @RequestMapping(method = RequestMethod.POST)
     private ModelAndView login(
             @RequestParam(value = "client_key", required = false) String clientKey,
@@ -84,6 +100,22 @@ public class Authentication {
             @RequestParam(value = "password", required = false) String password
     ) {
 
+        /**
+         * Validate if the client key and redirect uri exists in the database
+         */
+
+        AuthResponseDTO authResponseDTO = new AuthResponseDTO() {
+            {
+                setClientKey(clientKey);
+                setRedirectUri(redirectUri);
+            }
+        };
+
+        String validationMessage = authValidator.validate(authResponseDTO);
+
+        /**
+         * Validate if the user is existing
+         */
         LoginDTO loginDTO = new LoginDTO() {
             {
                 setUsername(username);
@@ -91,7 +123,8 @@ public class Authentication {
             }
         };
 
-        String validationMessage = userValidator.validate(loginDTO);
+        if (Constants.SUCCESS.equals(validationMessage))
+            validationMessage = userValidator.validate(loginDTO);
 
         ModelAndView modelAndView = new ModelAndView("index");
         modelAndView.addObject("error", validationMessage);
@@ -110,9 +143,8 @@ public class Authentication {
             String responseRedirectUri = client.getUri();
 
             /**
-             * Generate unique code here
+             * Generate unique code
              */
-
             StringBuilder sb = new StringBuilder();
             sb.append(client.getKey())
                     .append(client.getUri())
@@ -133,11 +165,15 @@ public class Authentication {
                 return modelAndView;
             }
 
+            /**
+             *  Create session
+             */
             Session session = new Session();
             session.setClient(client.getId());
             session.setUser(user.getId());
             session.setCode(code);
 
+            // delete the existing session in the database with the same client id and user id
             sessionRepository.delete(session);
 
             sessionRepository.save(session);
